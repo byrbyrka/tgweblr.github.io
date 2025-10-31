@@ -37,6 +37,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body>
+    <script>
+    (function(){
+        // Если есть параметр backend в URL, прокинем его дальше в client.html
+        const p = new URLSearchParams(window.location.search);
+        const backend = p.get('backend');
+        if (backend) {
+            window.location.replace('client.html?backend=' + encodeURIComponent(backend));
+        }
+    })();
+    </script>
     <header>
         <div class="container">
             <div class="pill">MPGram Web · лёгкая веб-версия на MadelineProto</div>

@@ -124,8 +124,21 @@
         $('logout').addEventListener('click', (e)=>{ e.preventDefault(); go('/login.php?logout=1'); });
         $('openPeer').addEventListener('click', (e)=>{ e.preventDefault(); const p=$('peer').value.trim(); if(!p){status.textContent='Укажите peer/id';return;} go('/chat.php?c='+encodeURIComponent(p)); });
 
-        // init: 1) saved 2) same-origin autodetect
+        // init: 1) ?backend=... 2) saved 3) same-origin autodetect
         (async function init(){
+            const params = new URLSearchParams(window.location.search);
+            const qp = params.get('backend');
+            if (qp) {
+                const v = norm(qp);
+                if (v) {
+                    try { localStorage.setItem(key, v); } catch(e) {}
+                    input.value = v;
+                    status.innerHTML = '<span class="ok">Установлен backend из URL:</span> ' + v;
+                    // Автоматически переходим на логин
+                    go('/login.php');
+                    return;
+                }
+            }
             const saved = get();
             if(saved){ input.value = saved; status.innerHTML = '<span class="ok">Текущий backend:</span> ' + saved; return; }
             const auto = sameOriginBase();
