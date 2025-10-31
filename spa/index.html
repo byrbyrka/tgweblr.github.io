@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MPGram Web SPA (GitHub Pages)</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#0f1320">
+    <!-- GramJS через CDN (browser build) -->
+    <script src="https://cdn.jsdelivr.net/npm/telegram@2.20.5/dist/telegram.min.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="card">
+            <h1>MPGram Web — SPA</h1>
+            <p class="muted">Полностью статический клиент на GitHub Pages. Авторизация по телефону и коду.</p>
+
+            <div id="auth">
+                <div class="row">
+                    <label>Телефон (вместе с кодом страны):</label>
+                    <input id="phone" type="tel" placeholder="+79990000000" autocomplete="tel">
+                </div>
+                <div class="row">
+                    <button id="sendCode">Получить код</button>
+                </div>
+                <div id="codeRow" class="row" style="display:none;">
+                    <label>Код из Telegram:</label>
+                    <input id="code" type="text" inputmode="numeric" placeholder="12345">
+                </div>
+                <div id="pwRow" class="row" style="display:none;">
+                    <label>Пароль (2FA), если включён:</label>
+                    <input id="pw" type="password" placeholder="Пароль">
+                </div>
+                <div class="row">
+                    <button id="confirm" style="display:none;">Войти</button>
+                </div>
+                <div id="status" class="hint"></div>
+            </div>
+
+            <div id="app" style="display:none;">
+                <div class="row">
+                    <button id="loadDialogs">Загрузить чаты</button>
+                    <button id="logout">Выход</button>
+                </div>
+                <div id="dialogs" class="list"></div>
+                <div id="chat" class="chat" style="display:none;">
+                    <div id="messages" class="messages"></div>
+                    <div class="row">
+                        <input id="msg" type="text" placeholder="Сообщение">
+                        <button id="send">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+
